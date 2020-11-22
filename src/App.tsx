@@ -1,16 +1,16 @@
 import React from 'react'
+import { Route, Switch } from 'react-router-dom'
 import './App.scss'
-import babel from '@img/babel.jpg'
+// import { useRoutes } from './routes'
+// import babel from '@img/babel.jpg'
+import {HomePage} from './pages/Home/HomePage'
 
-interface Props {
-  text: string
-}
+export const App: React.FC = ({}) => {
+  // const routes = useRoutes(true)
 
-export const App: React.FC<Props> = ({text}) => {
   return (
-    <div>
-      <p>Hello Webpack & React & {text}!</p>
-      <img src={babel} />
-    </div>
+    <Switch>
+      <Route path='/' component={HomePage} />
+    </Switch>
   )
 }
