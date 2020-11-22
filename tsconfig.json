@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "es5",                         
+    "module": "commonjs",
+    "allowJs": true,
+    "jsx": "react",                     
+    "strict": true,                          
+    "noImplicitAny": true,
+    "outDir": "./dist",  
+    "strictNullChecks": true,              
+    "strictBindCallApply": true,           
+    "noUnusedLocals": true,                
+    "esModuleInterop": true,                 
+    "skipLibCheck": true,                    
+    "forceConsistentCasingInFileNames": true 
+  }
+}
