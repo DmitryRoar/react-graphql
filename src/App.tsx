@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Switch } from 'react-router-dom'
+import {Route, Switch} from 'react-router-dom'
 import './App.scss'
 // import { useRoutes } from './routes'
 // import babel from '@img/babel.jpg'
@@ -10,7 +10,7 @@ export const App: React.FC = ({}) => {
 
   return (
     <Switch>
-      <Route path='/' component={HomePage} />
+      <Route path='/' component={HomePage}/>
     </Switch>
   )
 }

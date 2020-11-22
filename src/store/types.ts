@@ -1,0 +1,2 @@
+export const HOME_LOADING = 'HOME_LOADING'
+export const HOME_GETUSERS = 'HOME_GETUSERS'

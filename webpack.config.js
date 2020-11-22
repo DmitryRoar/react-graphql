@@ -26,7 +26,7 @@ const plugins = () => {
   ]
 
   return base
-} 
+}
 
 const babelOptions = preset => {
   const opts = {
@@ -36,10 +36,10 @@ const babelOptions = preset => {
     plugins: [
       '@babel/plugin-proposal-class-properties'
     ]
-  } 
+  }
 
   if (preset) {
-      opts.presets.push(preset)
+    opts.presets.push(preset)
   }
 
   return opts
@@ -48,7 +48,7 @@ const babelOptions = preset => {
 const jsLoaders = () => {
   const loaders = [{
     loader: 'babel-loader',
-    options: babelOptions() 
+    options: babelOptions()
   }]
 
   if (isDev) {
@@ -57,7 +57,7 @@ const jsLoaders = () => {
 
   return loaders
 }
- 
+
 module.exports = {
   context: resolve(__dirname, 'src'),
   mode: 'development',
@@ -82,13 +82,13 @@ module.exports = {
         test: /\.css$/i,
         use: [{
           loader: MiniCssExtractPlugin.loader
-        }, 'css-loader']  
+        }, 'css-loader']
       },
       {
         test: /\.s[ac]ss$/i,
         use: [MiniCssExtractPlugin.loader, {
           loader: 'css-loader'
-        }, 'sass-loader']   
+        }, 'sass-loader']
       },
       {
         test: /\.(png|jpg|jpeg|gif|svg|webmp)/i,
@@ -105,7 +105,7 @@ module.exports = {
             loader: 'babel-loader',
             options: babelOptions('@babel/preset-typescript')
           }
-        ] 
+        ]
       },
       {
         test: /\.js$/i,

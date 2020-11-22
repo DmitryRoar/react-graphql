@@ -1,37 +1,26 @@
-import React, {useState, useEffect} from 'react'
-import axios from 'axios'
-import { UsersList } from '../../components/UsersList'
+import React, {useEffect} from 'react'
+import {useDispatch, useSelector} from 'react-redux'
+import {Loader} from '../../components/Loader/Loader'
 
-interface IUsers {
-  name: string
-  age: string
-  id: string
-}
+import {UsersList} from '../../components/UsersList'
+import {IUsers} from '../../interfaces'
+import {getUsers} from '../../store/actions/home'
 
 export const HomePage: React.FC = () => {
-  const [users, setUsers] = useState([]) 
-
-  const getUsers = async () => {
-    const query = `
-      query {
-        getUsers {
-          name age id
-        }
-      }
-    ` 
-    const {data} = await axios.post('http://localhost:3001/graphql', {query})
-    setUsers(data.data.getUsers)
-  }
+  const dispatch = useDispatch()
+  const users = useSelector((state: any) => state.home.users)
+  const loading = useSelector((state: any) => state.home.loading)
 
   useEffect(() => {
-    getUsers()    
+    dispatch(getUsers())
   }, [])
 
   return (
     <div>
+      {loading && <Loader/>}
       <ul>
-        {users.map((user: IUsers) => (
-          <UsersList key={user.id} name={user.name} age={user.age} />
+        {users.map((user: IUsers, idx: number) => (
+          <UsersList key={idx} name={user.name} age={user.age}/>
         ))}
       </ul>
     </div>
