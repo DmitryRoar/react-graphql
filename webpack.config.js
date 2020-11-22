@@ -46,10 +46,10 @@ const babelOptions = preset => {
 }
 
 const jsLoaders = () => {
-  const loaders = {
+  const loaders = [{
     loader: 'babel-loader',
     options: babelOptions() 
-  }
+  }]
 
   if (isDev) {
     loaders.push('eslint-loader')
@@ -67,7 +67,10 @@ module.exports = {
     path: resolve(__dirname, 'dist')
   },
   resolve: {
-    extensions: ['.js', '.ts', '.jsx', '.tsx']
+    extensions: ['.js', '.ts', '.jsx', '.tsx'],
+    alias: {
+      '@img': resolve(__dirname, 'public', 'assets', 'img')
+    }
   },
   devServer: {
     port: 3000 // какого-то хуя девсервер не работает в webpack v5
