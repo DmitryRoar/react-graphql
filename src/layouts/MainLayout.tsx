@@ -1,10 +1,10 @@
 import React from 'react'
-import {App} from '../App'
+import {HomePage} from '../pages/Home/HomePage'
 
 export const MainLayout: React.FC = () => {
   return (
     <div>
-      <App/>
+      <HomePage/>
     </div>
   )
 }

@@ -1,2 +1,3 @@
 export const HOME_LOADING = 'HOME_LOADING'
-export const HOME_GETUSERS = 'HOME_GETUSERS'
+export const HOME_GET_USERS = 'HOME_GET_USERS'
+export const HOME_ADD_USER = 'HOME_ADD_USER'

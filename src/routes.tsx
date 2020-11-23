@@ -3,7 +3,11 @@ import {Switch, Route} from 'react-router-dom'
 
 import {HomePage} from './pages/Home/HomePage'
 
-export const useRoutes = isAuth => {
+interface Props {
+  isAuth: boolean
+}
+
+export const useRoutes: React.FC<Props> = (isAuth) => {
   if (isAuth) {
     return (
       <Switch>
@@ -11,4 +15,10 @@ export const useRoutes = isAuth => {
       </Switch>
     )
   }
+
+  return (
+    <Switch>
+      <Route/>
+    </Switch>
+  )
 }
