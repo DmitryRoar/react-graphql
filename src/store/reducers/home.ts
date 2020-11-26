@@ -25,7 +25,7 @@ export const homeReducer = (state = initialState, action: IAction): State  => {
     case HOME_LOADING:
       return {...state, loading: true}
     case HOME_ADD_USER:
-      return {...state, users: [{...action.payload}, ...state.users]}
+      return {...state, users: [...state.users, {...action.payload}]}
     default:
       return state
   }

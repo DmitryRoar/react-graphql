@@ -6,8 +6,6 @@ const CopyPlugin = require('copy-webpack-plugin')
 
 const isDev = process.env.NODE_ENV === 'development'
 
-const filename = ext => isDev ? `[name].${ext}` : `[name].[hash].${ext}`
-
 const plugins = () => {
   const base = [
     new CopyPlugin({
@@ -21,7 +19,10 @@ const plugins = () => {
     new MiniCssExtractPlugin(),
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      template: resolve(__dirname, 'public', 'index.html')
+      template: resolve(__dirname, 'public', 'index.html'),
+      minify: {
+        collapseWhitespace: !isDev
+      }
     })
   ]
 
@@ -63,8 +64,9 @@ module.exports = {
   mode: 'development',
   entry: ['@babel/polyfill', './index'],
   output: {
-    filename: filename('js'),
-    path: resolve(__dirname, 'dist')
+    filename: isDev ? '[name].js' : '[name].[hash].js',
+    path: resolve(__dirname, 'dist'),
+    publicPath: '/'
   },
   resolve: {
     extensions: ['.js', '.ts', '.jsx', '.tsx'],
@@ -73,7 +75,8 @@ module.exports = {
     }
   },
   devServer: {
-    port: 3000 // какого-то хуя девсервер не работает в webpack v5
+    port: 3000, // какого-то хуя девсервер не работает в webpack v5
+    historyApiFallback: true
   },
   plugins: plugins(),
   module: {

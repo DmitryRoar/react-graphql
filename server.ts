@@ -1,4 +1,4 @@
-const chalk = require('chalk')
+const {resolve} = require('path')
 const cors = require('cors')
 const {graphqlHTTP} = require('express-graphql')
 const express = require('express')
@@ -12,7 +12,9 @@ const resolver = require('./graphql/resolver')
 const PORT = process.env.PORT || 3001
 
 app
-  .use(cors())
+  .use(cors({
+    original: 'http://localhost:3000'
+  }))
   .use(express.json())
   .use('/graphql', graphqlHTTP({
     schema,

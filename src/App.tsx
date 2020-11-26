@@ -1,16 +1,14 @@
 import React from 'react'
-import {Route, Switch} from 'react-router-dom'
 import './App.scss'
-import { MainLayout } from './layouts/MainLayout'
-// import { useRoutes } from './routes'
-// import babel from '@img/babel.jpg'
 
-export const App: React.FC = ({}) => {
-  // const routes = useRoutes(true)
+import { useRoutes } from './routes'
+
+export const App: React.FC = () => {
+  const routes = useRoutes(false)
 
   return (
-    <Switch>
-      <Route path='/' component={MainLayout}/>
-    </Switch>
+    <div>
+      {routes}
+    </div>
   )
 }

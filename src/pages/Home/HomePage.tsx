@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {CreateUser} from '../../containers/CreateUser'
+import {CreateUser} from '../../containers/CreateUser/CreateUser'
 import {Loader} from '../../components/Loader/Loader'
 import {UsersList} from '../../components/UsersList'
 
@@ -18,13 +18,18 @@ export const HomePage: React.FC = () => {
 
   return (
     <div>
-      {loading && <Loader/>}
-      <CreateUser/>
-      <ul>
-        {users.map((user: IUsers, idx: number) => (
-          <UsersList key={idx} name={user.name} age={user.age}/>
-        ))}
-      </ul>
+      {
+        loading 
+          ? <Loader/>
+          : <>
+              <CreateUser/>
+              <ul>
+                {users.map((user: IUsers, idx: number) => (
+                <UsersList key={idx} name={user.name} age={user.age}/>
+                ))}
+              </ul>
+            </> 
+      }
     </div>
   )
 }

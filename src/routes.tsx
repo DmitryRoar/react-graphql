@@ -1,24 +1,25 @@
 import React from 'react'
-import {Switch, Route} from 'react-router-dom'
+import {Switch, Route, Redirect} from 'react-router-dom'
 
 import {HomePage} from './pages/Home/HomePage'
+import {LoginPage} from './pages/Login/LoginPage'
+import {SignupPage} from './pages/Signup/SignupPage'
 
-interface Props {
-  isAuth: boolean
-}
-
-export const useRoutes: React.FC<Props> = (isAuth) => {
+export const useRoutes: React.FC<any> = (isAuth: boolean) => {
   if (isAuth) {
     return (
       <Switch>
-        <Route path='/' component={HomePage} />
+        <Route path='/' exact component={HomePage} />
+        <Redirect to='/' />
       </Switch>
     )
   }
 
   return (
     <Switch>
-      <Route/>
+      <Route path='/login' exact component={LoginPage} />
+      <Route path='/sign-up' exact component={SignupPage} />
+      <Redirect to='/login' />
     </Switch>
   )
 }

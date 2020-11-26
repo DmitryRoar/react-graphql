@@ -1,6 +1,7 @@
 import React, {SyntheticEvent, useRef} from 'react'
+import './CreataeUser.scss'
 import {useDispatch} from 'react-redux'
-import {addUser} from '../store/actions/home'
+import {addUser} from '../../store/actions/home'
 
 export const CreateUser: React.FC = () => {
   const dispatch = useDispatch()
@@ -16,6 +17,8 @@ export const CreateUser: React.FC = () => {
     if (!age.trim() || !name.trim()) return
 
     dispatch(addUser(name, age))
+    nameRef.current.value = ''
+    ageRef.current.value = ''
   }
 
   return (
