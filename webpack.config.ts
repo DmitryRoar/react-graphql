@@ -1,4 +1,4 @@
-const {resolve} = require('path')
+const path = require('path')
 const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -6,20 +6,25 @@ const CopyPlugin = require('copy-webpack-plugin')
 
 const isDev = process.env.NODE_ENV === 'development'
 
+interface IBabelOptions { 
+  presets: string[]
+  plugins: string[]
+}
+
 const plugins = () => {
   const base = [
     new CopyPlugin({
       patterns: [
         {
-          from: resolve(__dirname, 'public', 'favicon.ico'),
-          to: resolve(__dirname, 'dist')
+          from: path.resolve(__dirname, 'public', 'favicon.ico'),
+          to: path.resolve(__dirname, 'dist')
         }
       ]
     }),
     new MiniCssExtractPlugin(),
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      template: resolve(__dirname, 'public', 'index.html'),
+      template: path.resolve(__dirname, 'public', 'index.html'),
       minify: {
         collapseWhitespace: !isDev
       }
@@ -29,8 +34,8 @@ const plugins = () => {
   return base
 }
 
-const babelOptions = preset => {
-  const opts = {
+const babelOptions = (preset?: string) => {
+  const opts: IBabelOptions = {
     presets: [
       '@babel/preset-env'
     ],
@@ -47,7 +52,7 @@ const babelOptions = preset => {
 }
 
 const jsLoaders = () => {
-  const loaders = [{
+  const loaders: any = [{
     loader: 'babel-loader',
     options: babelOptions()
   }]
@@ -60,22 +65,22 @@ const jsLoaders = () => {
 }
 
 module.exports = {
-  context: resolve(__dirname, 'src'),
+  context: path.resolve(__dirname, 'src'),
   mode: 'development',
   entry: ['@babel/polyfill', './index'],
   output: {
     filename: isDev ? '[name].js' : '[name].[hash].js',
-    path: resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'dist'),
     publicPath: '/'
   },
   resolve: {
     extensions: ['.js', '.ts', '.jsx', '.tsx'],
     alias: {
-      '@img': resolve(__dirname, 'public', 'assets', 'img')
+      '@img': path.resolve(__dirname, 'public', 'assets', 'img')
     }
   },
   devServer: {
-    port: 3000, // какого-то хуя девсервер не работает в webpack v5
+    port: 3000, 
     historyApiFallback: true
   },
   plugins: plugins(),
@@ -119,7 +124,7 @@ module.exports = {
         test: /\.tsx/i,
         use: [{
           loader: 'babel-loader',
-          options: babelOptions('@babel/preset-react', '@babel/preset-typescript')
+          options: babelOptions(...['@babel/preset-react', '@babel/preset-typescript'])
         }, 'ts-loader']
       },
       {

@@ -6,6 +6,7 @@ import {UsersList} from '../../components/UsersList'
 
 import {getUsers} from '../../store/actions/home'
 import {IUsers} from '../../interfaces'
+import { logout } from '../../store/actions/auth'
 
 export const HomePage: React.FC = () => {
   const dispatch = useDispatch()
@@ -15,6 +16,10 @@ export const HomePage: React.FC = () => {
   useEffect(() => {
     dispatch(getUsers())
   }, [])
+
+  const logoutHandler = () => {
+    dispatch(logout())
+  }
 
   return (
     <div>
@@ -28,6 +33,8 @@ export const HomePage: React.FC = () => {
                 <UsersList key={idx} name={user.name} age={user.age}/>
                 ))}
               </ul>
+
+              <button onClick={logoutHandler}>Logout</button>
             </> 
       }
     </div>

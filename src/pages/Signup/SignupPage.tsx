@@ -1,12 +1,15 @@
 import React, {useState, useRef, SyntheticEvent} from 'react'
-import {Link} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 import axios from 'axios'
 
 export const SignupPage: React.FC = () => {
   const [passwordType, setPasswordType] = useState(true)
+  const [confrimPasswordType, setConfirmPasswordType] = useState(true)
   const emailRef: any = useRef('')
   const passwordRef: any = useRef('')
   const confrimPasswordRef: any = useRef('')
+
+  const temp = useHistory()
 
   const submitHandler = async (event: SyntheticEvent) => {
     event.preventDefault()
@@ -28,10 +31,7 @@ export const SignupPage: React.FC = () => {
       }
     `
     await axios.post('http://localhost:3001/graphql', {query})
-
-    emailRef.current.value = ''
-    passwordRef.current.value = ''
-    confrimPasswordRef.current.value = ''
+    temp.push('/login')
   }
 
   return (
@@ -54,16 +54,16 @@ export const SignupPage: React.FC = () => {
             eye
           </button>
         </label>
-        <label htmlFor='password'>Confirm Password: 
+        <label htmlFor='confirm-password'>Confirm Password: 
           <input 
-            id='password' 
-            type={passwordType ? 'password' : 'text'} 
+            id='confirm-password' 
+            type={confrimPasswordType ? 'password' : 'text'} 
             ref={confrimPasswordRef} 
             placeholder='password' 
           />
           <button 
             type='button' 
-            onClick={() => setPasswordType(prev => !prev)}
+            onClick={() => setConfirmPasswordType(prev => !prev)}
           >
             eye
           </button>

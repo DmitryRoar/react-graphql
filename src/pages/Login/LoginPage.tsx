@@ -18,9 +18,6 @@ export const LoginPage: React.FC = () => {
     if (!email && !password) return
 
     dispatch(authorize(email, password))
-
-    emailRef.current.value = ''
-    passwordRef.current.value = ''
   }
 
   return (

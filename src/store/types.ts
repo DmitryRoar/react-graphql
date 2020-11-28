@@ -5,3 +5,4 @@ export const HOME_SHOW_ALERT = 'HOME_SHOW_ALERT'
 export const HOME_HIDE_ALERT = 'HOME_HIDE_ALERT'
 
 export const AUTH_AUTHORIZE = 'AUTH_AUTHORIZE'
+export const AUTH_LOGOUT = 'AUTH_LOGOUT'

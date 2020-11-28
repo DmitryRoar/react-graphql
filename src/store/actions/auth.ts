@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {AUTH_AUTHORIZE} from '../types'
+import {AUTH_AUTHORIZE, AUTH_LOGOUT} from '../types'
 
 
 export const authorize = (email: string, password: string) => async (dispatch: any) => {
@@ -17,7 +17,21 @@ export const authorize = (email: string, password: string) => async (dispatch: a
       type: AUTH_AUTHORIZE
     })
   } catch (e) {
-    console.log
+    console.log('[AUTH_AUTHORIZE]: ', e)
   }
 }
 
+export const checkAuthorization = () => (dispatch: any) => {
+  if (localStorage.getItem('token')) {
+    dispatch({
+      type: AUTH_AUTHORIZE
+    })
+  }
+}
+
+export const logout = () => {
+  localStorage.removeItem('token')
+  return {
+    type: AUTH_LOGOUT
+  }
+}
