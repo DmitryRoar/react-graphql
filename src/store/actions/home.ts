@@ -1,6 +1,6 @@
+import {IUsers} from '../../interfaces'
 import {HOME_LOADING, HOME_GET_USERS, HOME_ADD_USER} from '../types'
 import axios from 'axios'
-import { IUsers } from '../../interfaces'
 
 const loading = () => ({
   type: HOME_LOADING
@@ -24,7 +24,7 @@ export const getUsers = () => async (dispatch: any) => {
     const {data} = await axios.post('http://localhost:3001/graphql', {query})
     dispatch(getUsersAction(data.data.getUsers))
   } catch (e) {
-    console.log('[HOME-GetUsers:]', e)
+    console.log('[HOME_GETUSERS:]', e)
   }
 }
 
@@ -45,6 +45,6 @@ export const addUser = (name: string, age: string) => async (dispatch: any) => {
     const {data} = await axios.post('http://localhost:3001/graphql', {query})
     dispatch(addUserAction(data.data.addUser))
   } catch (e) {
-    console.log('[HOME-AddUser]: ', e)
+    console.log('[HOME_ADDUSER]: ', e)
   }
 }

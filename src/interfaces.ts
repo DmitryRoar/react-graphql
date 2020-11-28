@@ -3,3 +3,7 @@ export interface IUsers {
   age: string
   id: string
 }
+export interface IAction {
+  type: string
+  payload: any
+}

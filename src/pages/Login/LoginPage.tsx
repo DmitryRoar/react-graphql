@@ -1,16 +1,33 @@
-import React, {useRef, useState} from 'react'
+import React, {SyntheticEvent, useRef, useState} from 'react'
+import {useDispatch} from 'react-redux'
+import {Link} from 'react-router-dom'
+import {authorize} from '../../store/actions/auth'
 
 export const LoginPage: React.FC = () => {
   const [passwordType, setPasswordType] = useState(true)
+  const dispatch = useDispatch()
 
-  const loginRef: any = useRef('')
+  const emailRef: any = useRef('')
   const passwordRef: any = useRef('')
+
+  const submitHandler = (event: SyntheticEvent) => {
+    event.preventDefault()
+
+    const email = emailRef.current.value.trim()
+    const password = passwordRef.current.value.trim()
+    if (!email && !password) return
+
+    dispatch(authorize(email, password))
+
+    emailRef.current.value = ''
+    passwordRef.current.value = ''
+  }
 
   return (
     <div>
-      <form>
+      <form onSubmit={submitHandler}>
         <label htmlFor='email'>Email:  
-          <input type='email' id='email' ref={loginRef} placeholder='login' />
+          <input type='email' id='email' ref={emailRef} placeholder='email' />
         </label>
         <label htmlFor='password'>Password: 
           <input 
@@ -28,6 +45,8 @@ export const LoginPage: React.FC = () => {
         </label>
         <button type='submit'>Login</button>
       </form>
+
+      <Link to='/sign-up' >SignUp</Link>
     </div>
   )
 }

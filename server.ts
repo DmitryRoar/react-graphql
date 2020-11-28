@@ -15,7 +15,7 @@ app
   .use(cors({
     original: 'http://localhost:3000'
   }))
-  .use(express.json())
+  .use(express.json({extended: true}))
   .use('/graphql', graphqlHTTP({
     schema,
     rootValue: resolver,
