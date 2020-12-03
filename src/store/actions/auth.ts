@@ -18,6 +18,7 @@ export const authorize = (email: string, password: string) => async (dispatch: a
     })
   } catch (e) {
     console.log('[AUTH_AUTHORIZE]: ', e)
+    localStorage.removeItem('token')
   }
 }
 

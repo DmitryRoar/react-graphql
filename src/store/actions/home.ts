@@ -17,7 +17,9 @@ export const getUsers = () => async (dispatch: any) => {
     const query = `
       query {
         getUsers {
-          name age
+          userList {
+            name age
+          }
         }
       }
     ` 
@@ -38,12 +40,14 @@ export const addUser = (name: string, age: string) => async (dispatch: any) => {
     const query = `
       mutation {
         addUser(name: "${name}", age: "${age}") {
-          name age
+          userList {
+            name age
+          }
         }
       }
     `
     const {data} = await axios.post('http://localhost:3001/graphql', {query})
-    dispatch(addUserAction(data.data.addUser))
+    dispatch(addUserAction(data.data.addUser.userList))
   } catch (e) {
     console.log('[HOME_ADDUSER]: ', e)
   }

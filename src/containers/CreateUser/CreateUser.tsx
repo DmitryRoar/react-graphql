@@ -1,5 +1,5 @@
 import React, {SyntheticEvent, useRef} from 'react'
-import './CreataeUser.scss'
+import './CreataeUser.classes.scss'
 import {useDispatch} from 'react-redux'
 import {addUser} from '../../store/actions/home'
 

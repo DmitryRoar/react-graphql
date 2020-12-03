@@ -7,16 +7,16 @@ import {IUsers} from '../src/interfaces'
 
 module.exports = {
   async getUsers() {
-    return await AppUser.find({}, (err: any, u: IUsers[]) => {
+    return await AppUser.find({}, (err: any, users: IUsers[]) => {
       if (err) {
         console.log('[MONGO_GetUsers]: ', err)
         return
       }
-      return u
+      return users
     })
   },
   async addUser({name, age}: any) {
-    const user = new AppUser({name, age})
+    const user = new AppUser({userList: [{name, age}]})
     await user.save()
     return user
   },
@@ -28,7 +28,10 @@ module.exports = {
       }
 
       const hashedPassword = await bcrypt.hash(password, 12)
-      const user = await new User({email, password: hashedPassword})
+      const user = await new User({
+        email, 
+        password: hashedPassword
+      })
       await user.save()
       return user
     } catch (e) {

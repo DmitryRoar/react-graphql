@@ -6,7 +6,7 @@ import {UsersList} from '../../components/UsersList'
 
 import {getUsers} from '../../store/actions/home'
 import {IUsers} from '../../interfaces'
-import { logout } from '../../store/actions/auth'
+import {logout} from '../../store/actions/auth'
 
 export const HomePage: React.FC = () => {
   const dispatch = useDispatch()
@@ -24,18 +24,18 @@ export const HomePage: React.FC = () => {
   return (
     <div>
       {
-        loading 
+        loading
           ? <Loader/>
           : <>
-              <CreateUser/>
-              <ul>
-                {users.map((user: IUsers, idx: number) => (
+            <CreateUser/>
+            <ul>
+              {users.map((user: IUsers, idx: number) => (
                 <UsersList key={idx} name={user.name} age={user.age}/>
-                ))}
-              </ul>
+              ))}
+            </ul>
 
-              <button onClick={logoutHandler}>Logout</button>
-            </> 
+            <button onClick={logoutHandler}>Logout</button>
+          </>
       }
     </div>
   )

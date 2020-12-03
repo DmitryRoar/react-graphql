@@ -9,7 +9,7 @@ export const SignupPage: React.FC = () => {
   const passwordRef: any = useRef('')
   const confrimPasswordRef: any = useRef('')
 
-  const temp = useHistory()
+  const history = useHistory()
 
   const submitHandler = async (event: SyntheticEvent) => {
     event.preventDefault()
@@ -26,12 +26,12 @@ export const SignupPage: React.FC = () => {
     const query = `
       mutation {
         register(email: "${email}", password: "${password}") {
-          id
+          userToken
         }
       }
     `
     await axios.post('http://localhost:3001/graphql', {query})
-    temp.push('/login')
+    history.push('/login')
   }
 
   return (

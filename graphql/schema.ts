@@ -1,25 +1,25 @@
 const {buildSchema} = require('graphql')
 
 module.exports = buildSchema(`
-  type Users {
+  type AppUsers {
     name: String!
     age: String!
-    id: ID!
   }
 
+  type Test {
+    userList: [AppUsers!]
+  }
+  
   type User {
     email: String!
     password: String!
     userToken: String
-    id: ID
   }
-
   type Query {
-    getUsers: [Users]!
+    getUsers: [Test!]
   }
-
   type Mutation {
-    addUser(name: String!, age: String!): Users!
+    addUser(name: String!, age: String!): Test!
     register(email: String! password: String!): User!
     login(email: String! password: String!): User!
   }
