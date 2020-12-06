@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
+import config from 'config'
 
 import {AppUser} from '../models/AppUser'
 import {User} from '../models/User'
@@ -9,14 +10,13 @@ module.exports = {
   async getUsers() {
     return await AppUser.find({}, (err: any, users: IUsers[]) => {
       if (err) {
-        console.log('[MONGO_GetUsers]: ', err)
-        return
+        throw new Error(`[MONGO_GetUsers]: ${err}`)
       }
       return users
     })
   },
   async addUser({name, age}: any) {
-    const user = new AppUser({userList: [{name, age}]})
+    const user = new AppUser({name, age})
     await user.save()
     return user
   },
@@ -34,8 +34,8 @@ module.exports = {
       })
       await user.save()
       return user
-    } catch (e) {
-      console.log('[MONGO_REGISTER]: ', e)
+    } catch (err) {
+      throw new Error(`[MONGO_REGISTER]: ${err}`)
     }
   },
   async login({email, password}: any) {
@@ -50,12 +50,13 @@ module.exports = {
       }
       const token = jwt.sign(
         {userId: user._id},
-        'dmitry martishka',
+        config.get('jwtSecret'),
         {expiresIn: '1h'}
       )
-      return {userToken: token}
-    } catch (e) {
-      console.log('[MONGO_LOGIN]', e)
+
+      return `Bearer ${token}`
+    } catch (err) {
+      throw new Error(`[MONGO_LOGIN]: ${err}`)
     }
   }
 }

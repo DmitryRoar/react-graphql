@@ -1,0 +1,6 @@
+{
+  "port": "3001",
+  "mongoURI": "mongodb+srv://roar:idinaxuy@cluster0.odko0.mongodb.net/users",
+  "jwtSecret": "dmitry martishka",
+  "baseURL": "http://localhost:3000"
+}

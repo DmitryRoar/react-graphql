@@ -1,5 +1,6 @@
 import React, {SyntheticEvent, useRef} from 'react'
-import './CreataeUser.classes.scss'
+import classes from './CreateUser.module.scss'
+
 import {useDispatch} from 'react-redux'
 import {addUser} from '../../store/actions/home'
 
@@ -23,7 +24,7 @@ export const CreateUser: React.FC = () => {
 
   return (
     <div>
-      <form onSubmit={submitHandler}>
+      <form onSubmit={submitHandler} className={classes.From}>
         <label htmlFor='name'>Name: </label>
         <input ref={nameRef} id='name' type='text' />
         <label htmlFor='age'>Age: </label>

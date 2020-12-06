@@ -1,31 +1,34 @@
-const {resolve} = require('path')
-const cors = require('cors')
-const {graphqlHTTP} = require('express-graphql')
 const express = require('express')
 const app = express()
-// const keys = require('./config/keys') // CONFIG!
 const mongoose = require('mongoose')
+const cors = require('cors')
+const {resolve} = require('path')
+const {graphqlHTTP} = require('express-graphql')
+const passport = require('passport')
+const config = require('config')
 
 const schema = require('./graphql/schema')
 const resolver = require('./graphql/resolver')
 
-const PORT = process.env.PORT || 3001
+const PORT = config.get('port')
 
 app
   .use(cors({
     original: 'http://localhost:3000'
   }))
   .use(express.json({extended: true}))
+  .use(passport.initialize())
   .use('/graphql', graphqlHTTP({
     schema,
     rootValue: resolver,
     graphiql: true
   }))
-
+  
+require('./middleware/passport')(passport)
 
 const start = async () => {
   try {
-    await mongoose.connect('mongodb+srv://roar:idinaxuy@cluster0.odko0.mongodb.net/users', {
+    await mongoose.connect(config.get('mongoURI'), {
       useNewUrlParser: true,
       useFindAndModify: false,
       useUnifiedTopology: true

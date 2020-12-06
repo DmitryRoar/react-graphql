@@ -1,7 +1,10 @@
 import React, {SyntheticEvent, useRef, useState} from 'react'
 import {useDispatch} from 'react-redux'
 import {Link} from 'react-router-dom'
+import { Button } from '../../components/Button/Button'
 import {authorize} from '../../store/actions/auth'
+
+import classes from './LoginPage.module.scss'
 
 export const LoginPage: React.FC = () => {
   const [passwordType, setPasswordType] = useState(true)
@@ -22,28 +25,30 @@ export const LoginPage: React.FC = () => {
 
   return (
     <div>
-      <form onSubmit={submitHandler}>
-        <label htmlFor='email'>Email:  
-          <input type='email' id='email' ref={emailRef} placeholder='email' />
-        </label>
-        <label htmlFor='password'>Password: 
+      <div className={classes.Wrap}>
+        <form onSubmit={submitHandler} className={classes.Form}>
+          <div className={classes.FormEmail}>
+            <label htmlFor='email'>Email: </label>
+            <input type='email' id='email' ref={emailRef} placeholder='email' />
+          </div>
+          <label htmlFor='password'>Password: </label>
           <input 
-            id='password' 
-            type={passwordType ? 'password' : 'text'} 
-            ref={passwordRef} 
-            placeholder='password' 
-          />
-          <button 
-            type='button' 
-            onClick={() => setPasswordType(prev => !prev)}
-          >
-            eye
-          </button>
-        </label>
-        <button type='submit'>Login</button>
-      </form>
+              id='password' 
+              type={passwordType ? 'password' : 'text'} 
+              ref={passwordRef} 
+              placeholder='password' 
+            />
+            <span
+              onClick={() => setPasswordType(prev => !prev)}
+              className={classes.showPassword}
+            >
+              eye
+            </span>
+            <Button className='danger' type='submit'>Login</Button>
+        </form>
 
-      <Link to='/sign-up' >SignUp</Link>
+        <Link to='/sign-up' >SignUp</Link>
+      </div>
     </div>
   )
 }

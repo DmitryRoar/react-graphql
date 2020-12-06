@@ -1,0 +1,20 @@
+.Wrap {
+  background: red;
+  height: 100vh;
+}
+
+.Form {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.showPassword {
+  cursor: pointer;
+  user-select: none;
+}
+
+.FormEmail {
+  display: flex;
+  flex-direction: column;
+}

@@ -12,7 +12,7 @@ const schema = new Schema({
   },
   userId: {
     type: Types.ObjectId,
-    ref: 'User'
+    ref: 'AppUser'
   }
 })
 

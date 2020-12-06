@@ -3,6 +3,7 @@ import './App.scss'
 
 import {useDispatch, useSelector} from 'react-redux'
 import {useRoutes} from './routes'
+
 import {checkAuthorization} from './store/actions/auth'
 
 export const App: React.FC = () => {
