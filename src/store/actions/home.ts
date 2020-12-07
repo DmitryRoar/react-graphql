@@ -17,9 +17,7 @@ export const getUsers = () => async (dispatch: any) => {
     const query = `
       query {
         getUsers {
-          userList {
-            name age
-          }
+          name age
         }
       }
     ` 

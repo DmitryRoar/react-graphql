@@ -15,6 +15,7 @@ module.exports = buildSchema(`
   type Query {
     getUsers: [AppUsers!]
   }
+  
   type Mutation {
     addUser(name: String!, age: String!): AppUsers!
     register(email: String! password: String!): User!

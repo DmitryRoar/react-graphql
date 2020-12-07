@@ -4,7 +4,6 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const {resolve} = require('path')
 const {graphqlHTTP} = require('express-graphql')
-const passport = require('passport')
 const config = require('config')
 
 const schema = require('./graphql/schema')
@@ -17,15 +16,12 @@ app
     original: 'http://localhost:3000'
   }))
   .use(express.json({extended: true}))
-  .use(passport.initialize())
   .use('/graphql', graphqlHTTP({
     schema,
     rootValue: resolver,
     graphiql: true
   }))
   
-require('./middleware/passport')(passport)
-
 const start = async () => {
   try {
     await mongoose.connect(config.get('mongoURI'), {

@@ -3,8 +3,11 @@ import authClasses from '../Auth.module.scss'
 import Logo from '@img/roar.png'
 
 import {Link, useHistory} from 'react-router-dom'
+import {useDispatch} from 'react-redux'
 import axios from 'axios'
-import { Button } from '../../../components/Button/Button'
+
+import {alertError} from '../../../store/actions/auth'
+import {Button} from '../../../components/Button/Button'
 
 export const SignupPage: React.FC = () => {
   const [passwordType, setPasswordType] = useState(true)
@@ -17,6 +20,7 @@ export const SignupPage: React.FC = () => {
   const confrimPasswordRef: any = useRef('')
 
   const history = useHistory()
+  const dispatch = useDispatch()
 
   const submitHandler = async (event: SyntheticEvent) => {
     event.preventDefault()
@@ -27,18 +31,23 @@ export const SignupPage: React.FC = () => {
     
     if (!email || !password || !confrimPassword) return
     if (password !== confrimPassword) {
+      dispatch(alertError('Different password'))
       throw new Error('Different password')
     }
-
-    const query = `
-      mutation {
-        register(email: "${email.trim()}", password: "${password.trim()}") {
-          userToken
+    
+    try {
+      const query = `
+        mutation {
+          register(email: "${email}", password: "${password}") {
+            userToken
+          }
         }
-      }
-    `
-    await axios.post('http://localhost:3001/graphql', {query})
-    history.push('/login')
+      `
+      await axios.post('http://localhost:3001/graphql', {query})
+      history.push('/login')
+    } catch (e) {
+      dispatch(alertError('Email Exists'))
+    }
   }
 
   const showPasswordHandler = () => {

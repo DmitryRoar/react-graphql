@@ -1,5 +1,6 @@
 $fontSize: 1.1rem;
 $fontColor: #fff;
+$borderColor: #000;
 $inputPadding: 8px 20px 8px 10px;
 
 .Form {
@@ -7,14 +8,14 @@ $inputPadding: 8px 20px 8px 10px;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background: #ffffff38;
-  border: 1px solid gray;
+  background:#f7daff;
   border-radius: 8px;
   width: 30%;
   height: 450px;
   margin: 0 auto;
 
   input {
+    border: 1px solid $borderColor;
     padding: $inputPadding;
     border-radius: 4px;
     font-size: $fontSize;
@@ -34,6 +35,7 @@ $inputPadding: 8px 20px 8px 10px;
     font-size: $fontSize;
     color: $fontColor;
     margin: 10px 0 5px 0;
+    color: #000;
   }
 }
 
@@ -42,7 +44,7 @@ $inputPadding: 8px 20px 8px 10px;
 }
 
 .Input {
-  border: 1px solid #000;
+  border: 1px solid $borderColor;
   background: #fff;
   padding: $inputPadding;
   border-radius: 4px;

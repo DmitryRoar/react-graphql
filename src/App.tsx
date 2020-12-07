@@ -5,6 +5,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import {useRoutes} from './routes'
 
 import {checkAuthorization} from './store/actions/auth'
+import { Alert } from './containers/Alert/Alert'
 
 export const App: React.FC = () => {
   const dispatch = useDispatch()
@@ -17,7 +18,9 @@ export const App: React.FC = () => {
 
   return (
     <div>
-      {routes}
+      <Alert>
+        {routes}
+      </Alert>
     </div>
   )
 }

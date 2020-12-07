@@ -1,6 +1,10 @@
 import axios from 'axios'
-import {AUTH_AUTHORIZE, AUTH_LOGOUT} from '../types'
+import {AUTH_AUTHORIZE, AUTH_ERROR, AUTH_LOGOUT} from '../types'
 
+export const alertError = (payload: string) => ({
+  type: AUTH_ERROR,
+  payload
+})
 
 export const authorize = (email: string, password: string) => async (dispatch: any) => {
   try {

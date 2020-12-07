@@ -1,5 +1,5 @@
-import { IAction, IUsers } from '../../interfaces'
-import { HOME_ADD_USER, HOME_GET_USERS, HOME_HIDE_ALERT, HOME_LOADING, HOME_SHOW_ALERT } from '../types'
+import {IAction, IUsers} from '../../interfaces'
+import {HOME_ADD_USER, HOME_GET_USERS, HOME_LOADING} from '../types'
 
 interface State {
   users: IUsers[],
@@ -23,10 +23,6 @@ export const homeReducer = (state = initialState, action: IAction): State  => {
       return {...state, loading: true}
     case HOME_ADD_USER:
       return {...state, users: [...state.users, ...action.payload]}
-    case HOME_SHOW_ALERT: 
-      return {...state, alert: action.payload}
-    case HOME_HIDE_ALERT: 
-      return {...state, alert: ''}
     default:
       return state
   }
