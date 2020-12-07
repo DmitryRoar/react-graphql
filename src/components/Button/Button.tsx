@@ -8,7 +8,7 @@ interface Props {
   onClick?: any
 }
 
-export const Button: React.FC<Props> = ({type, className, children, onClick}) => {
+export const Button: React.FC<Props> = ({type = 'button', className = 'default', children, onClick}) => {
   const classList = [classes.Button]
   if (className) {
     classList.push(classes[className])

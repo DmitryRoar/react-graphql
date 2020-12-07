@@ -1,0 +1,9 @@
+@import '../../var';
+
+.Wrap {
+  background: $color_theme;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

@@ -1,0 +1,67 @@
+$fontSize: 1.1rem;
+$fontColor: #fff;
+$inputPadding: 8px 20px 8px 10px;
+
+.Form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: #ffffff38;
+  border: 1px solid gray;
+  border-radius: 8px;
+  width: 30%;
+  height: 450px;
+  margin: 0 auto;
+
+  input {
+    padding: $inputPadding;
+    border-radius: 4px;
+    font-size: $fontSize;
+  }
+}
+
+.showPassword {
+  cursor: pointer;
+  user-select: none;
+}
+
+.FormInputWrap {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    font-size: $fontSize;
+    color: $fontColor;
+    margin: 10px 0 5px 0;
+  }
+}
+
+.WrapForInput {
+  width: 40%;
+}
+
+.Input {
+  border: 1px solid #000;
+  background: #fff;
+  padding: $inputPadding;
+  border-radius: 4px;
+  font-size: $fontSize;
+
+  input {
+    border: none;
+    background: none;
+    padding: 0;
+  }
+}
+
+button {
+  margin-top: 8px;
+}
+
+.Logo {
+  img {
+    width: 100px;
+    height: 75px;
+  }
+}

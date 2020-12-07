@@ -3,11 +3,24 @@
   border: none;
   border-radius: 4px;
   padding: 5px 20px; 
-
-  .danger {
-    background: rgb(219, 189, 14) !important;
-  }
-
-
 }
 
+.default {
+  background: #19191b;
+
+  a {
+    color: #fff
+  }
+}
+
+.success {
+  background: rgb(14, 219, 14);
+}
+
+.danger {
+  background: rgb(219, 189, 14);
+}
+
+.warning {
+  background: rgb(219, 14, 41);
+}
