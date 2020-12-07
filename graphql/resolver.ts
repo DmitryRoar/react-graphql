@@ -54,7 +54,7 @@ module.exports = {
         {expiresIn: '1h'}
       )
 
-      return `Bearer ${token}`
+      return {userToken: token}
     } catch (err) {
       throw new Error(`[MONGO_LOGIN]: ${err}`)
     }

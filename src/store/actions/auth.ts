@@ -16,7 +16,7 @@ export const authorize = (email: string, password: string) => async (dispatch: a
       }
     `
     const {data} = await axios.post('http://localhost:3001/graphql', {query})
-    console.log(data.data.login.userToken)
+    localStorage.setItem('token', data.data.login.userToken)
     dispatch({
       type: AUTH_AUTHORIZE
     })

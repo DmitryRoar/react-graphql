@@ -1,4 +1,7 @@
 .From {
+  display: inline-flex;
+  flex-direction: column;
+
   input {
     border: 1px solid #000;
     padding: 5px 0;
@@ -9,5 +12,23 @@
     border-radius: 4px;
     color: #ccc;
     padding: 5px 20px;
+  }
+}
+
+.FormInputWrap {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    font-size: 1.1rem;
+    color: #fff;
+    margin: 10px 0 5px 0;
+  }
+  
+  input {
+    border: 1px solid #fff;
+    padding: 5px 25px 5px 10px;
+    border-radius: 4px;
+    font-size: 1.1rem;
   }
 }

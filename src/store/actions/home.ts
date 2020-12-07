@@ -38,14 +38,12 @@ export const addUser = (name: string, age: string) => async (dispatch: any) => {
     const query = `
       mutation {
         addUser(name: "${name}", age: "${age}") {
-          userList {
-            name age
-          }
+          name age
         }
       }
     `
     const {data} = await axios.post('http://localhost:3001/graphql', {query})
-    dispatch(addUserAction(data.data.addUser.userList))
+    dispatch(addUserAction(data.data.addUser))
   } catch (e) {
     console.log('[HOME_ADDUSER]: ', e)
   }

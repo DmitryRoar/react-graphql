@@ -25,10 +25,14 @@ export const CreateUser: React.FC = () => {
   return (
     <div>
       <form onSubmit={submitHandler} className={classes.From}>
-        <label htmlFor='name'>Name: </label>
-        <input ref={nameRef} id='name' type='text' />
-        <label htmlFor='age'>Age: </label>
-        <input ref={ageRef} id='age' type='number' />
+        <div className={classes.FormInputWrap}>
+          <label htmlFor='name'>Name: </label>
+          <input ref={nameRef} id='name' type='text' />
+        </div>
+        <div className={classes.FormInputWrap}>
+          <label htmlFor='age'>Age: </label>
+          <input ref={ageRef} id='age' type='number' />
+        </div>
         <button type='submit'>Create</button>
       </form>
     </div>
