@@ -4,20 +4,19 @@ import Logo from '@img/roar.png'
 
 import {Link, useHistory} from 'react-router-dom'
 import {useDispatch} from 'react-redux'
-import axios from 'axios'
 
-import {alertError} from '../../../store/actions/auth'
+import {register} from '../../../store/actions/auth'
 import {Button} from '../../../components/Button/Button'
 
 export const SignupPage: React.FC = () => {
   const [passwordType, setPasswordType] = useState(true)
-  const [confrimPasswordType, setConfirmPasswordType] = useState(true)
+  const [confirmPassword, setConfirmPasswordType] = useState(true)
   const [showPassword, setShowPassword] = useState(false)
-  const [showConfirmPassword, setShowConfrimPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
   const emailRef: any = useRef('')
   const passwordRef: any = useRef('')
-  const confrimPasswordRef: any = useRef('')
+  const confirmPasswordRef: any = useRef('')
 
   const history = useHistory()
   const dispatch = useDispatch()
@@ -27,27 +26,9 @@ export const SignupPage: React.FC = () => {
 
     const email = String(emailRef.current.value).trim()
     const password = String(passwordRef.current.value).trim()
-    const confrimPassword = String(confrimPasswordRef.current.value).trim()
+    const confirmPassword = String(confirmPasswordRef.current.value).trim()
     
-    if (!email || !password || !confrimPassword) return
-    if (password !== confrimPassword) {
-      dispatch(alertError('Different password'))
-      throw new Error('Different password')
-    }
-    
-    try {
-      const query = `
-        mutation {
-          register(email: "${email}", password: "${password}") {
-            userToken
-          }
-        }
-      `
-      await axios.post('http://localhost:3001/graphql', {query})
-      history.push('/login')
-    } catch (e) {
-      dispatch(alertError('Email Exists'))
-    }
+    dispatch(register({email, password, confirmPassword}, history))
   }
 
   const showPasswordHandler = () => {
@@ -57,7 +38,7 @@ export const SignupPage: React.FC = () => {
 
   const showConfirmPasswordHadnler = () => {
     setConfirmPasswordType(prev => !prev)
-    setShowConfrimPassword(prev => !prev)
+    setShowConfirmPassword(prev => !prev)
   }
 
   return (
@@ -102,12 +83,12 @@ export const SignupPage: React.FC = () => {
           </div>
 
           <div className={authClasses.FormInputWrap}>
-            <label htmlFor='confirmPassword'>Password: </label>
+            <label htmlFor='confirmPassword'>Confirm Password: </label>
             <div className={authClasses.Input}>
               <input 
                 id='confirmPassword' 
-                type={confrimPasswordType ? 'password' : 'text'} 
-                ref={confrimPasswordRef} 
+                type={confirmPassword ? 'password' : 'text'} 
+                ref={confirmPasswordRef} 
                 placeholder='password' 
               />
               {
@@ -125,7 +106,7 @@ export const SignupPage: React.FC = () => {
 
             <Button type='submit'>SignUp</Button>
             <Button>
-              <Link to='/login'>LogIn</Link>
+              <Link to='/login'>LogIn Page</Link>
             </Button>
           </div>
         </div>

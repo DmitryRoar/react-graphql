@@ -22,7 +22,7 @@ export const LoginPage: React.FC = () => {
     const password = passwordRef.current.value.trim()
     if (!email && !password) return
 
-    dispatch(authorize(email, password))
+    dispatch(authorize(email, password, localStorage.getItem('user-id')))
   }
 
   const showPasswordHandler = () => {
@@ -72,7 +72,7 @@ export const LoginPage: React.FC = () => {
 
             <Button type='submit'>LogIn</Button>
             <Button>
-              <Link to='/sign-up'>SignUp</Link>
+              <Link to='/sign-up'>SignUp Page</Link>
             </Button>
           </div>
         </div>

@@ -7,18 +7,20 @@ import {User} from '../models/User'
 import {IUsers} from '../src/interfaces'
 
 module.exports = {
-  async getUsers() {
-    return await AppUser.find({}, (err: any, users: IUsers[]) => {
-      if (err) {
-        throw new Error(`[MONGO_GetUsers]: ${err}`)
-      }
-      return users
-    })
+  async getUsers(req: any) {
+    console.log('req.userId', req.userId)
+    console.log('req.userId', req.isAuth)
+    return await AppUser.find() as IUsers[]
   },
-  async addUser({name, age}: any) {
-    const user = new AppUser({name, age})
-    await user.save()
-    return user
+  async addUser({name, age}: any, req: any) {
+    try {
+      const user = new AppUser({name, age, owner: req.userId})
+      await user.save()
+      return user
+    } catch (err) {
+      console.log(err)
+      throw new Error(err)
+    }
   },
   async register({email, password}: any) {
     try {
@@ -33,12 +35,12 @@ module.exports = {
         password: hashedPassword
       })
       await user.save()
-      return user
+      return {userId: user._id}
     } catch (err) {
       throw new Error(`[MONGO_REGISTER]: ${err}`)
     }
   },
-  async login({email, password}: any) {
+  async login({email, password}: any, req: any) {
     try {
       const user = await User.findOne({email})
       if (!user) {
@@ -53,8 +55,7 @@ module.exports = {
         config.get('jwtSecret'),
         {expiresIn: '1h'}
       )
-
-      return {userToken: token}
+      return {userId: user._id, token, tokenExpiration: 1}
     } catch (err) {
       throw new Error(`[MONGO_LOGIN]: ${err}`)
     }

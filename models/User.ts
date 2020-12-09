@@ -10,7 +10,7 @@ const schema = new Schema({
     type: String,
     required: true
   },
-  userId: {
+  createUser: {
     type: Types.ObjectId,
     ref: 'AppUser'
   }
