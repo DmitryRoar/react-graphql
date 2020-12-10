@@ -3,8 +3,10 @@ import config from 'config'
 
 import { NextFunction } from 'express'
 
-module.exports = (req: any, res: Response, next: NextFunction) => {
-  const authHeader = req.get('Authorization')
+module.exports = (req: any, res: any, next: NextFunction) => {
+  const authHeader = res.cookie('userId')
+  console.log(authHeader)
+  next()
   if (!authHeader) {
     req.isAuth = false
     return next()
@@ -23,7 +25,7 @@ module.exports = (req: any, res: Response, next: NextFunction) => {
     }
     req.isAuth = true
     console.log(decodedToken.userId)
-    req.userId = decodedToken.userId
+    res.session.userId = decodedToken.userId
     next()
 
   } catch (err) {

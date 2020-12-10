@@ -22,7 +22,7 @@ export const LoginPage: React.FC = () => {
     const password = passwordRef.current.value.trim()
     if (!email && !password) return
 
-    dispatch(authorize(email, password, localStorage.getItem('user-id')))
+    dispatch(authorize(email, password))
   }
 
   const showPasswordHandler = () => {

@@ -1,6 +1,7 @@
-import {IUsers} from '../../interfaces'
-import {HOME_LOADING, HOME_GET_USERS, HOME_ADD_USER} from '../types'
 import axios from 'axios'
+
+import {HOME_LOADING, HOME_GET_USERS, HOME_ADD_USER} from '../types'
+import {IUsers} from '../../../interfaces'
 
 const loading = () => ({
   type: HOME_LOADING

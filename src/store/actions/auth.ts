@@ -1,22 +1,16 @@
 import axios from 'axios'
 import {AUTH_AUTHORIZE, AUTH_ERROR, AUTH_LOGOUT} from '../types'
 
-interface IRegisterArgs {
-  email: string
-  password: string
-  confirmPassword: string
-}
-
 export const alertError = (payload: string) => ({
   type: AUTH_ERROR,
   payload
 })
 
-export const authorize = (email: string, password: string, req: any) => async (dispatch: any) => {
+export const authorize = (email: string, password: string) => async (dispatch: any) => {
   try {
     const query = `
       mutation {
-        login(email: "${email}", password: "${password}", req: "${req}") {
+        login(email: "${email}", password: "${password}") {
           userId token tokenExpiration
         }
       }
@@ -48,6 +42,12 @@ export const logout = () => {
   return {
     type: AUTH_LOGOUT
   }
+}
+
+interface IRegisterArgs {
+  email: string
+  password: string
+  confirmPassword: string
 }
 
 export const register = (args: IRegisterArgs, history: any) => async (dispatch: any) => {

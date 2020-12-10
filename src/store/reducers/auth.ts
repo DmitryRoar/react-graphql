@@ -1,4 +1,4 @@
-import {IAction} from '../../interfaces'
+import {IAction} from '../../../interfaces'
 import {AUTH_AUTHORIZE, AUTH_LOGOUT, AUTH_ERROR} from '../types'
 
 interface State {

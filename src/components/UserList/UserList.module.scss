@@ -1,4 +1,17 @@
-.List {
-  padding: 12px 0 10px 0;
+.Wrap {
+  display: flex;
+  justify-content: space-between;
   border-bottom: 1px dashed #fff;
+  padding: 12px 0 10px 0;
+  
+  &:hover {
+    .Times {
+      display: inline-flex;
+    }
+  }
+}
+
+.Times {
+  display: none;
+  cursor: pointer;
 }

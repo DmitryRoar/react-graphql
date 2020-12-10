@@ -1,4 +1,4 @@
-import {IAction, IUsers} from '../../interfaces'
+import {IAction, IUsers} from '../../../interfaces'
 import {HOME_ADD_USER, HOME_GET_USERS, HOME_LOADING} from '../types'
 
 interface State {

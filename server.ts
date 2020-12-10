@@ -4,20 +4,35 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const {resolve} = require('path')
 const {graphqlHTTP} = require('express-graphql')
-const config = require('config')
-const isAuth = require('./middleware/isAuth') 
+const cookieParser = require('cookie-parser')
+const session = require('express-session')
+const MongoStore = require('connect-mongodb-session')(session)
 
+const config = require('config')
+// const isAuth = require('./middleware/isAuth') 
 const schema = require('./graphql/schema')
 const resolver = require('./graphql/resolver')
 
 const PORT = config.get('port')
 
+const store = new MongoStore({
+  uri: config.get('mongoURI'),
+  collection: 'sessions'
+})
+
 app
-  .use(isAuth)
   .use(cors({
     original: 'http://localhost:3000'
   }))
   .use(express.json({extended: true}))
+  .use(session({
+    secret: config.get('sessionSecret'),
+    resave: false,
+    saveUninitialized: true,
+    cookie: {maxAge: 60000},
+    store
+  }))
+  .use(cookieParser())
   .use('/graphql', graphqlHTTP({
     schema,
     rootValue: resolver,

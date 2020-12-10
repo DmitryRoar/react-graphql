@@ -24,6 +24,6 @@ module.exports = buildSchema(`
   type Mutation {
     addUser(name: String!, age: String!, owner: ID): AppUsers!
     register(email: String!, password: String!): UserRegister!
-    login(email: String!, password: String!, req: ID): UserLogin!
+    login(email: String!, password: String!): UserLogin!
   }
 `)

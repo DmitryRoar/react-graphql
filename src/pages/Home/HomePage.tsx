@@ -5,11 +5,12 @@ import {useDispatch, useSelector} from 'react-redux'
 import {CreateUser} from '../../containers/CreateUser/CreateUser'
 import {Loader} from '../../components/Loader/Loader'
 import {UsersList} from '../../components/UserList/UsersList'
+import {Button} from '../../components/Button/Button'
 
 import {getUsers} from '../../store/actions/home'
-import {IUsers} from '../../interfaces'
 import {logout} from '../../store/actions/auth'
-import { Button } from '../../components/Button/Button'
+
+import {IUsers} from '../../../interfaces'
 
 export const HomePage: React.FC = () => {
   const dispatch = useDispatch()
@@ -31,7 +32,7 @@ export const HomePage: React.FC = () => {
           ? <Loader/>
           : <div className={classes.Wrap}>
             <CreateUser/>
-            <div>
+            <div className={classes.UserListWrap}>
               <ul>
                 {users.map((user: IUsers, idx: number) => (
                   <UsersList key={idx} name={user.name} age={user.age}/>
