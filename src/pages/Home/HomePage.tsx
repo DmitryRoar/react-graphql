@@ -10,7 +10,7 @@ import {Button} from '../../components/Button/Button'
 import {getUsers} from '../../store/actions/home'
 import {logout} from '../../store/actions/auth'
 
-import {IUsers} from '../../../interfaces'
+import {IUser} from '../../../interfaces'
 
 export const HomePage: React.FC = () => {
   const dispatch = useDispatch()
@@ -18,7 +18,7 @@ export const HomePage: React.FC = () => {
   const loading = useSelector((state: any) => state.home.loading)
 
   useEffect(() => {
-    dispatch(getUsers())
+    dispatch(getUsers(String(localStorage.getItem('user-id'))))
   }, [])
 
   const logoutHandler = () => {
@@ -34,7 +34,7 @@ export const HomePage: React.FC = () => {
             <CreateUser/>
             <div className={classes.UserListWrap}>
               <ul>
-                {users.map((user: IUsers, idx: number) => (
+                {users.map((user: IUser, idx: number) => (
                   <UsersList key={idx} name={user.name} age={user.age}/>
                 ))}
               </ul>

@@ -3,6 +3,10 @@ $fontColor: #fff;
 $borderColor: #000;
 $inputPadding: 8px 20px 8px 10px;
 
+.Wrap {
+  display: flex;
+}
+
 .Form {
   display: flex;
   align-items: center;
@@ -10,7 +14,7 @@ $inputPadding: 8px 20px 8px 10px;
   flex-direction: column;
   background:#f7daff;
   border-radius: 8px;
-  width: 30%;
+  width: 500px;
   height: 450px;
   margin: 0 auto;
 
@@ -43,6 +47,8 @@ $inputPadding: 8px 20px 8px 10px;
 }
 
 .Input {
+  display: flex;
+  align-items: center;
   border: 1px solid $borderColor;
   background: #fff;
   padding: $inputPadding;
@@ -50,6 +56,7 @@ $inputPadding: 8px 20px 8px 10px;
   font-size: $fontSize;
 
   input {
+    width: 100%;
     border: none;
     background: none;
     padding: 0;

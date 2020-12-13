@@ -33,11 +33,22 @@ app
     store
   }))
   .use(cookieParser())
-  .use('/graphql', graphqlHTTP({
+  .use('/graphql', graphqlHTTP((req: any, res: any) => ({
     schema,
     rootValue: resolver,
-    graphiql: true
-  }))
+    graphiql: true,
+    context: {
+      setSession(nameSession: string, value: string | object) {
+        req[nameSession] = value
+        return req.session.save((err: any) => {
+          if (err) return
+        })
+      },
+      readSession(nameSession: string) {
+        return req[nameSession]
+      }
+    }
+  })))
   
 const start = async () => {
   try {

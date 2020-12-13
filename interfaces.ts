@@ -1,6 +1,7 @@
-export interface IUsers {
+export interface IUser {
   name: string
   age: string
+  _id: string
 }
 
 export interface IAction {
@@ -12,4 +13,8 @@ export interface IAuthProps {
   email: string
   password: string
   confirmPassword?: string
+}
+
+export interface IForUserIdFind {
+  owner: string
 }

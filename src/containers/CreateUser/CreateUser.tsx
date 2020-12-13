@@ -17,14 +17,14 @@ export const CreateUser: React.FC = () => {
 
     if (!age.trim() || !name.trim()) return
 
-    dispatch(addUser(name, age))
+    dispatch(addUser(name, age, String(localStorage.getItem('user-id'))))
     nameRef.current.value = ''
     ageRef.current.value = ''
   }
 
   return (
     <div>
-      <form onSubmit={submitHandler} className={classes.From}>
+      <form onSubmit={submitHandler} className={classes.Form}>
         <div className={classes.FormInputWrap}>
           <label htmlFor='name'>Name: </label>
           <input ref={nameRef} id='name' type='text' />

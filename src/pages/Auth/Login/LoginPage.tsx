@@ -31,7 +31,7 @@ export const LoginPage: React.FC = () => {
   }
 
   return (
-    <div>
+    <div className={authClasses.Wrap}>
       <form onSubmit={submitHandler} className={authClasses.Form}>
         <div className={authClasses.Logo}>
           <img src={Logo} />

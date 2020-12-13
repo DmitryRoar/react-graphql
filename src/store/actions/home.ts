@@ -1,51 +1,82 @@
 import axios from 'axios'
 
-import {HOME_LOADING, HOME_GET_USERS, HOME_ADD_USER} from '../types'
-import {IUsers} from '../../../interfaces'
+import {HOME_LOADING, HOME_GET_USERS, HOME_ADD_USER, HOME_ERROR, HOME_REMOVE_USER} from '../types'
 
 const loading = () => ({
   type: HOME_LOADING
 })
 
-const getUsersAction = (payload: IUsers[]) => ({
-  type: HOME_GET_USERS,
+const homeError = (payload = 'Something went wrong') => ({
+  type: HOME_ERROR,
   payload
 })
 
-export const getUsers = () => async (dispatch: any) => {
+// const getUsersAction = (payload: IUser[]) => ({
+  
+// })
+
+export const getUsers = (owner: string) => async (dispatch: any) => {
   dispatch(loading())
   try {
     const query = `
-      query {
-        getUsers {
-          name age
+      mutation {
+        getUsers(owner: "${owner}") {
+          name age 
         }
       }
     ` 
     const {data} = await axios.post('http://localhost:3001/graphql', {query})
-    dispatch(getUsersAction(data.data.getUsers))
+    dispatch({
+      type: HOME_GET_USERS,
+      payload: data.data.getUsers
+    })
   } catch (e) {
     console.log('[HOME_GETUSERS:]', e)
+    dispatch(homeError('Failed to load users. Try again'))
   }
 }
 
-const addUserAction = (payload: any) => ({
-  type: HOME_ADD_USER,
-  payload
-})
+// const addUserAction = (payload: any) => ({
+//   type: HOME_ADD_USER,
+//   payload
+// })
 
-export const addUser = (name: string, age: string) => async (dispatch: any) => {
+export const addUser = (name: string, age: string, owner: string) => async (dispatch: any) => {
   try {
     const query = `
       mutation {
-        addUser(name: "${name}", age: "${age}") {
+        addUser(name: "${name}", age: "${age}", owner: "${owner}") {
           name age
         }
       }
     `
     const {data} = await axios.post('http://localhost:3001/graphql', {query})
-    dispatch(addUserAction(data.data.addUser))
+    dispatch({
+      type: HOME_ADD_USER,
+      payload: data.data.addUser
+    })
   } catch (e) {
     console.log('[HOME_ADDUSER]: ', e)
+    dispatch(homeError('Failed to add user. Try again'))
+  }
+}
+
+export const removeAppUser = (owner: string) => async (dispatch: any) => {
+  try {
+    const query = `
+    mutation {
+      removeAppUser(owner: "${owner}") {
+        _id
+      }
+    }
+  `
+    const {data} = await axios.post('http://localhost:3001/graphql', {query})
+    dispatch({
+      type: HOME_REMOVE_USER,
+      payload: data.data.removeAppUser._id
+    })
+  } catch (e) {
+    console.log('[HOME_REMOVE_APPUSER]', e)
+    dispatch(homeError('Failed to delete user. Try again'))
   }
 }

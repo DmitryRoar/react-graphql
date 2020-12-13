@@ -5,6 +5,7 @@ module.exports = buildSchema(`
     name: String!
     age: String!
     owner: ID
+    _id: ID
   }
   
   type UserRegister {
@@ -13,16 +14,23 @@ module.exports = buildSchema(`
 
   type UserLogin {
     userId: ID
-    token: String!
+    token: String
     tokenExpiration: Int!
   }
 
   type Query {
-    getUsers: [AppUsers!]
+    test: String
+  }
+
+  type RemoveAppUser {
+    removeUser: AppUsers
   }
   
   type Mutation {
-    addUser(name: String!, age: String!, owner: ID): AppUsers!
+    getUsers(owner: String!): [AppUsers!]
+    addUser(name: String!, age: String!, owner: ID!): AppUsers!
+    removeAppUser(owner: String!): AppUsers!
+    
     register(email: String!, password: String!): UserRegister!
     login(email: String!, password: String!): UserLogin!
   }
